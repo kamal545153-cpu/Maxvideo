@@ -1,0 +1,2927 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width,
+               initial-scale=1.0,
+               maximum-scale=1.0,
+               user-scalable=no">
+
+<meta name="theme-color" content="#6957e8">
+
+<title>MAX VIDEO</title>
+
+
+<!-- Telegram Mini App SDK -->
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --primary:#6957e8;
+    --primary2:#9146b9;
+    --green:#18a66a;
+    --red:#e74c3c;
+    --yellow:#f4b400;
+    --bg:#f5f6fb;
+    --text:#25253a;
+    --muted:#77798c;
+    --border:#e7e7ef;
+}
+
+html,
+body{
+    width:100%;
+    min-height:100%;
+}
+
+body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:
+        "Segoe UI",
+        "Noto Sans Bengali",
+        Arial,
+        sans-serif;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.header{
+
+    width:100%;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--primary),
+            var(--primary2)
+        );
+
+    color:white;
+
+    padding:
+        15px
+        13px
+        20px;
+
+    border-radius:
+        0
+        0
+        24px
+        24px;
+
+    box-shadow:
+        0 8px 25px
+        rgba(80,60,180,.22);
+}
+
+.header-inner{
+    max-width:1000px;
+    margin:auto;
+}
+
+.topbar{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:10px;
+}
+
+.brand{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+}
+
+.logo{
+
+    width:45px;
+    height:45px;
+
+    border-radius:14px;
+
+    background:
+        rgba(255,255,255,.17);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:22px;
+}
+
+.brand-title{
+
+    font-size:18px;
+
+    font-weight:800;
+}
+
+.brand-sub{
+
+    margin-top:2px;
+
+    font-size:10px;
+
+    opacity:.8;
+}
+
+.mode{
+
+    padding:
+        7px
+        10px;
+
+    border-radius:20px;
+
+    background:
+        rgba(255,255,255,.15);
+
+    font-size:10px;
+
+    font-weight:700;
+}
+
+
+/* =====================================================
+   MAIN
+===================================================== */
+
+.main{
+
+    width:100%;
+
+    max-width:1000px;
+
+    margin:auto;
+
+    padding:
+        14px
+        11px
+        30px;
+}
+
+
+/* =====================================================
+   LOCKER
+===================================================== */
+
+.locker{
+
+    background:white;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:25px;
+
+    padding:
+        24px
+        15px;
+
+    box-shadow:
+        0 8px 30px
+        rgba(30,30,60,.07);
+}
+
+.lock-icon{
+
+    width:78px;
+    height:78px;
+
+    margin:
+        0
+        auto
+        14px;
+
+    border-radius:25px;
+
+    background:#f0edff;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:38px;
+}
+
+.locker-title{
+
+    text-align:center;
+
+    font-size:22px;
+
+    font-weight:800;
+
+    margin-bottom:8px;
+}
+
+.description{
+
+    max-width:650px;
+
+    margin:auto;
+
+    text-align:center;
+
+    color:var(--muted);
+
+    font-size:13px;
+
+    line-height:1.7;
+}
+
+
+/* =====================================================
+   PROGRESS
+===================================================== */
+
+.progress{
+
+    margin:
+        23px
+        0
+        20px;
+}
+
+.progress-info{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    margin-bottom:8px;
+
+    font-size:12px;
+}
+
+.progress-info strong{
+
+    color:var(--primary);
+
+    font-size:14px;
+}
+
+.progress-bar{
+
+    width:100%;
+
+    height:8px;
+
+    background:#eeeeF5;
+
+    border-radius:20px;
+
+    overflow:hidden;
+}
+
+.progress-fill{
+
+    width:0%;
+
+    height:100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--primary),
+            var(--primary2)
+        );
+
+    border-radius:20px;
+
+    transition:
+        width .35s ease;
+}
+
+
+/* =====================================================
+   STEPS
+===================================================== */
+
+.steps{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    margin:
+        20px
+        0
+        24px;
+}
+
+.step{
+
+    width:44px;
+    height:44px;
+
+    flex-shrink:0;
+
+    border-radius:50%;
+
+    background:#eeeef5;
+
+    color:#999aaa;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:14px;
+
+    font-weight:800;
+}
+
+.step.active{
+
+    background:var(--primary);
+
+    color:white;
+
+    box-shadow:
+        0 6px 15px
+        rgba(105,87,232,.25);
+}
+
+.step.done{
+
+    background:var(--green);
+
+    color:white;
+}
+
+.step-line{
+
+    width:38px;
+
+    height:3px;
+
+    background:#e2e2eb;
+}
+
+.step-line.done{
+
+    background:var(--green);
+}
+
+
+/* =====================================================
+   TASK CARD
+===================================================== */
+
+.task-card{
+
+    background:#fafaff;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:20px;
+
+    padding:17px;
+}
+
+.task-head{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+}
+
+.task-icon{
+
+    width:48px;
+    height:48px;
+
+    flex-shrink:0;
+
+    border-radius:15px;
+
+    background:#eeeaff;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:22px;
+}
+
+.task-title{
+
+    font-size:15px;
+
+    font-weight:800;
+}
+
+.task-sub{
+
+    margin-top:3px;
+
+    color:var(--muted);
+
+    font-size:11px;
+}
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+.status{
+
+    margin:
+        16px
+        0;
+
+    padding:12px;
+
+    border-radius:14px;
+
+    background:#f1efff;
+
+    color:#6254c7;
+
+    text-align:center;
+
+    font-size:12px;
+
+    line-height:1.7;
+
+    font-weight:600;
+}
+
+.status.waiting{
+
+    background:#fff7e5;
+
+    color:#876800;
+}
+
+.status.success{
+
+    background:#eafaf3;
+
+    color:#13845d;
+}
+
+.status.error{
+
+    background:#fff0ee;
+
+    color:#c0392b;
+}
+
+
+/* =====================================================
+   MAIN BUTTON
+===================================================== */
+
+.main-button{
+
+    width:100%;
+
+    border:0;
+
+    outline:none;
+
+    border-radius:15px;
+
+    padding:15px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--primary),
+            var(--primary2)
+        );
+
+    color:white;
+
+    font-size:14px;
+
+    font-weight:800;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 7px 18px
+        rgba(108,92,231,.20);
+
+    transition:
+        transform .15s ease,
+        opacity .15s ease;
+}
+
+.main-button:active{
+
+    transform:scale(.98);
+}
+
+.main-button:disabled{
+
+    opacity:.55;
+
+    cursor:not-allowed;
+
+    box-shadow:none;
+}
+
+.main-button.green{
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--green),
+            #27ae60
+        );
+}
+
+
+/* =====================================================
+   NOTICE
+===================================================== */
+
+.notice{
+
+    margin-top:13px;
+
+    padding:12px 13px;
+
+    border-radius:14px;
+
+    background:#fff8e7;
+
+    color:#806400;
+
+    font-size:11px;
+
+    line-height:1.7;
+}
+
+
+/* =====================================================
+   WEBSITE
+===================================================== */
+
+.website{
+
+    display:none;
+
+    width:100%;
+}
+
+.website.show{
+
+    display:block;
+}
+
+.website-header{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:10px;
+
+    margin-bottom:10px;
+
+    padding:11px 12px;
+
+    background:white;
+
+    border-radius:17px;
+
+    box-shadow:
+        0 5px 20px
+        rgba(30,30,60,.06);
+}
+
+.website-title{
+
+    font-size:14px;
+
+    font-weight:800;
+}
+
+.website-actions{
+
+    display:flex;
+
+    gap:6px;
+}
+
+.action-btn{
+
+    width:37px;
+    height:34px;
+
+    border:0;
+
+    border-radius:10px;
+
+    background:#f0f0f5;
+
+    cursor:pointer;
+
+    font-size:15px;
+}
+
+
+/* =====================================================
+   IFRAME
+===================================================== */
+
+.iframe-wrapper{
+
+    position:relative;
+
+    width:100%;
+
+    height:
+        calc(100vh - 130px);
+
+    min-height:450px;
+
+    overflow:hidden;
+
+    background:white;
+
+    border-radius:18px;
+
+    box-shadow:
+        0 8px 30px
+        rgba(30,30,60,.08);
+}
+
+.iframe-wrapper iframe{
+
+    width:100%;
+
+    height:100%;
+
+    display:block;
+
+    border:0;
+
+    background:white;
+}
+
+
+/* =====================================================
+   IFRAME LOADING
+===================================================== */
+
+.iframe-loading{
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:10;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    flex-direction:column;
+
+    gap:12px;
+
+    background:white;
+}
+
+.iframe-loading.hide{
+
+    display:none;
+}
+
+.spinner{
+
+    width:43px;
+    height:43px;
+
+    border:
+        4px solid
+        #eeeeee;
+
+    border-top-color:
+        var(--primary);
+
+    border-radius:50%;
+
+    animation:
+        spin .8s linear infinite;
+}
+
+@keyframes spin{
+
+    to{
+        transform:rotate(360deg);
+    }
+
+}
+
+
+/* =====================================================
+   IFRAME ERROR
+===================================================== */
+
+.iframe-error{
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:20;
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+    flex-direction:column;
+
+    text-align:center;
+
+    padding:25px;
+
+    background:white;
+}
+
+.iframe-error.show{
+
+    display:flex;
+}
+
+.error-icon{
+
+    font-size:55px;
+
+    margin-bottom:12px;
+}
+
+.iframe-error h3{
+
+    font-size:18px;
+
+    margin-bottom:8px;
+}
+
+.iframe-error p{
+
+    max-width:520px;
+
+    color:var(--muted);
+
+    font-size:12px;
+
+    line-height:1.7;
+}
+
+
+/* =====================================================
+   FULLSCREEN
+===================================================== */
+
+body.fullscreen{
+
+    overflow:hidden;
+}
+
+body.fullscreen .header{
+
+    display:none;
+}
+
+body.fullscreen .main{
+
+    max-width:none;
+
+    padding:0;
+}
+
+body.fullscreen .website-header{
+
+    display:none;
+}
+
+body.fullscreen .iframe-wrapper{
+
+    width:100%;
+
+    height:100vh;
+
+    min-height:100vh;
+
+    border-radius:0;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:600px){
+
+    .locker-title{
+
+        font-size:20px;
+    }
+
+    .description{
+
+        font-size:12px;
+    }
+
+    .step-line{
+
+        width:28px;
+    }
+
+    .iframe-wrapper{
+
+        min-height:400px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="header">
+
+    <div class="header-inner">
+
+        <div class="topbar">
+
+            <div class="brand">
+
+                <div class="logo">
+                    ▶️
+                </div>
+
+                <div>
+
+                    <div class="brand-title">
+                        MAX VIDEO
+                    </div>
+
+                    <div class="brand-sub">
+                        Watch • Discover • Enjoy
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="mode"
+                id="mode">
+
+                WEB
+
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<main class="main">
+
+
+<!-- =====================================================
+     LOCKER
+===================================================== -->
+
+<section
+    class="locker"
+    id="locker">
+
+
+    <div
+        class="lock-icon"
+        id="lockIcon">
+
+        🔒
+
+    </div>
+
+
+    <h1
+        class="locker-title"
+        id="lockerTitle">
+
+        Website Locked
+
+    </h1>
+
+
+    <p class="description">
+
+        আমাদের ওয়েবসাইটে প্রবেশ করার আগে
+        নিচের verification ধাপগুলো সম্পন্ন করুন।
+        প্রতিটি ধাপের পর এই অ্যাপে ফিরে এসে
+        পরবর্তী ধাপ সম্পন্ন করুন।
+
+    </p>
+
+
+    <!-- PROGRESS -->
+
+    <div class="progress">
+
+        <div class="progress-info">
+
+            <span>
+                Verification Progress
+            </span>
+
+            <strong id="progressCount">
+                0 / 3
+            </strong>
+
+        </div>
+
+
+        <div class="progress-bar">
+
+            <div
+                class="progress-fill"
+                id="progressFill">
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- STEPS -->
+
+    <div class="steps">
+
+        <div
+            class="step active"
+            id="step1">
+
+            1
+
+        </div>
+
+
+        <div
+            class="step-line"
+            id="line1">
+        </div>
+
+
+        <div
+            class="step"
+            id="step2">
+
+            2
+
+        </div>
+
+
+        <div
+            class="step-line"
+            id="line2">
+        </div>
+
+
+        <div
+            class="step"
+            id="step3">
+
+            3
+
+        </div>
+
+    </div>
+
+
+    <!-- TASK -->
+
+    <div class="task-card">
+
+
+        <div class="task-head">
+
+
+            <div class="task-icon">
+
+                🔐
+
+            </div>
+
+
+            <div>
+
+                <div
+                    class="task-title"
+                    id="taskTitle">
+
+                    Verification • 1/3
+
+                </div>
+
+
+                <div
+                    class="task-sub"
+                    id="taskSub">
+
+                    শুরু করতে নিচের বাটনে চাপ দিন
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="status"
+            id="status">
+
+            প্রথম verification শুরু করার
+            জন্য নিচের বাটনে চাপ দিন।
+
+        </div>
+
+
+        <button
+            class="main-button"
+            id="mainButton"
+            onclick="mainButtonClick()">
+
+            🔓 আনলক করুন • 1/3
+
+        </button>
+
+
+    </div>
+
+
+    <div class="notice">
+
+        ℹ️ বাটনে চাপ দিলে verification page
+        খুলবে। কমপক্ষে <b>৫ সেকেন্ড</b> পরে
+        এই অ্যাপে ফিরে এসে
+        <b>“আমি ফিরে এসেছি”</b> বাটনে চাপ দিন।
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =====================================================
+     MAIN WEBSITE
+===================================================== -->
+
+<section
+    class="website"
+    id="website">
+
+
+    <div class="website-header">
+
+        <div class="website-title">
+
+            🌐 MAX VIDEO Website
+
+        </div>
+
+
+        <div class="website-actions">
+
+            <button
+                class="action-btn"
+                onclick="reloadWebsite()">
+
+                🔄
+
+            </button>
+
+
+            <button
+                class="action-btn"
+                onclick="toggleFullscreen()">
+
+                ⛶
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="iframe-wrapper">
+
+
+        <div
+            class="iframe-loading"
+            id="iframeLoading">
+
+            <div class="spinner"></div>
+
+            <span
+                style="
+                font-size:12px;
+                color:#777;">
+
+                Website লোড হচ্ছে...
+
+            </span>
+
+        </div>
+
+
+
+        <div
+            class="iframe-error"
+            id="iframeError">
+
+            <div class="error-icon">
+
+                ⚠️
+
+            </div>
+
+
+            <h3>
+
+                Website লোড করা যায়নি
+
+            </h3>
+
+
+            <p id="iframeErrorText">
+
+                এই Website iframe-এর ভিতরে
+                প্রদর্শন করতে দিচ্ছে না অথবা
+                Website লোড হতে সমস্যা হয়েছে।
+
+            </p>
+
+        </div>
+
+
+
+        <!--
+
+        IMPORTANT:
+
+        allow-top-navigation নেই
+        allow-popups নেই
+        allow-top-navigation-by-user-activation নেই
+
+        তাই iframe-এর ভিতরের page-কে
+        parent/top-level page বাইরে নেওয়ার
+        permission দেওয়া হয়নি।
+
+        -->
+
+        <iframe
+            id="websiteFrame"
+            title="MAX VIDEO Website"
+            sandbox="
+                allow-scripts
+                allow-forms
+                allow-same-origin
+                allow-downloads
+            "
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen>
+        </iframe>
+
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+
+<script>
+
+/* =====================================================
+   CONFIGURATION
+===================================================== */
+
+const CONFIG = {
+
+
+    /*
+     * MAIN WEBSITE
+     *
+     * এখানে আপনার আসল website URL দিন।
+     */
+
+    websiteURL:
+        "https://www.pussyspace.com/update-indian-village-real/",
+
+
+    /*
+     * VERIFICATION URL
+     *
+     * তিনটি URL দিন।
+     */
+
+    verificationURLs: [
+
+        "https://www.profitableratecpmnetwork.com/x801mdkg17?key=0df95a006e5838299790ea50f7ad6307",
+
+        "https://www.profitableratecpmnetwork.com/mmn07ui04?key=6e3aea1fe24908cc1e951ea6a75d5a1c",
+
+        "https://www.profitableratecpmnetwork.com/mmn07ui04?key=6e3aea1fe24908cc1e951ea6a75d5a1c"
+
+    ],
+
+
+    /*
+     * Minimum verification time
+     */
+
+    waitSeconds: 5,
+
+
+    /*
+     * Unlock duration
+     *
+     * ১ ঘণ্টা
+     */
+
+    unlockDuration:
+        60 * 60 * 1000
+
+};
+
+
+
+/* =====================================================
+   TELEGRAM
+===================================================== */
+
+let telegramUserId = null;
+
+let isTelegram = false;
+
+
+try{
+
+    if(
+        window.Telegram &&
+        window.Telegram.WebApp
+    ){
+
+        const tg =
+            window.Telegram.WebApp;
+
+
+        tg.ready();
+
+        tg.expand();
+
+
+        isTelegram = true;
+
+
+        if(
+            tg.initDataUnsafe &&
+            tg.initDataUnsafe.user
+        ){
+
+            telegramUserId =
+                String(
+                    tg.initDataUnsafe
+                        .user
+                        .id
+                );
+
+        }
+
+
+        document.getElementById(
+            "mode"
+        ).textContent =
+            "TELEGRAM";
+
+    }
+
+}catch(error){
+
+    console.log(error);
+
+}
+
+
+/* =====================================================
+   USER KEY
+===================================================== */
+
+function getUserKey(){
+
+
+    /*
+     * Telegram User ID
+     */
+
+    if(telegramUserId){
+
+        return "telegram_" +
+               telegramUserId;
+
+    }
+
+
+    /*
+     * Normal Browser
+     */
+
+    let browserId =
+        localStorage.getItem(
+            "max_video_browser_id"
+        );
+
+
+    if(!browserId){
+
+        browserId =
+            "browser_" +
+            Date.now() +
+            "_" +
+            Math.random()
+                .toString(36)
+                .substring(2,10);
+
+
+        localStorage.setItem(
+            "max_video_browser_id",
+            browserId
+        );
+
+    }
+
+
+    return browserId;
+
+}
+
+
+const USER_KEY =
+    getUserKey();
+
+
+
+/* =====================================================
+   STORAGE
+===================================================== */
+
+const PROGRESS_KEY =
+    "max_video_progress_" +
+    USER_KEY;
+
+
+const START_KEY =
+    "max_video_start_" +
+    USER_KEY;
+
+
+const STEP_KEY =
+    "max_video_step_" +
+    USER_KEY;
+
+
+const UNLOCK_KEY =
+    "max_video_unlock_" +
+    USER_KEY;
+
+
+
+/* =====================================================
+   STATE
+===================================================== */
+
+let completed = 0;
+
+let waiting = false;
+
+
+
+/* =====================================================
+   UNLOCK CHECK
+===================================================== */
+
+function isUnlocked(){
+
+    const unlockTime =
+        parseInt(
+            localStorage.getItem(
+                UNLOCK_KEY
+            ) || "0",
+            10
+        );
+
+
+    if(!unlockTime){
+
+        return false;
+
+    }
+
+
+    const elapsed =
+        Date.now() -
+        unlockTime;
+
+
+    if(
+        elapsed <
+        CONFIG.unlockDuration
+    ){
+
+        return true;
+
+    }
+
+
+    /*
+     * ১ ঘণ্টা শেষ
+     */
+
+    localStorage.removeItem(
+        UNLOCK_KEY
+    );
+
+    localStorage.removeItem(
+        PROGRESS_KEY
+    );
+
+    localStorage.removeItem(
+        START_KEY
+    );
+
+    localStorage.removeItem(
+        STEP_KEY
+    );
+
+
+    return false;
+
+}
+
+
+
+/* =====================================================
+   LOAD SAVED STATE
+===================================================== */
+
+function loadState(){
+
+
+    /*
+     * Already unlocked
+     */
+
+    if(isUnlocked()){
+
+        completed = 3;
+
+        waiting = false;
+
+        return;
+
+    }
+
+
+    /*
+     * Progress
+     */
+
+    const savedProgress =
+        parseInt(
+            localStorage.getItem(
+                PROGRESS_KEY
+            ) || "0",
+            10
+        );
+
+
+    if(
+        savedProgress >= 0 &&
+        savedProgress <= 3
+    ){
+
+        completed =
+            savedProgress;
+
+    }
+    else{
+
+        completed = 0;
+
+    }
+
+
+    /*
+     * Pending verification
+     */
+
+    const savedStart =
+        parseInt(
+            localStorage.getItem(
+                START_KEY
+            ) || "0",
+            10
+        );
+
+
+    const savedStep =
+        parseInt(
+            localStorage.getItem(
+                STEP_KEY
+            ) || "-1",
+            10
+        );
+
+
+    if(
+        savedStart &&
+        savedStep === completed &&
+        completed < 3
+    ){
+
+        waiting = true;
+
+    }
+    else{
+
+        waiting = false;
+
+    }
+
+}
+
+
+
+/* =====================================================
+   UPDATE PROGRESS UI
+===================================================== */
+
+function updateUI(){
+
+
+    document.getElementById(
+        "progressCount"
+    ).textContent =
+        completed +
+        " / 3";
+
+
+    document.getElementById(
+        "progressFill"
+    ).style.width =
+        (
+            completed /
+            3 *
+            100
+        ) +
+        "%";
+
+
+    for(
+        let i = 1;
+        i <= 3;
+        i++
+    ){
+
+        const step =
+            document.getElementById(
+                "step" + i
+            );
+
+
+        step.classList.remove(
+            "active",
+            "done"
+        );
+
+
+        if(
+            i <= completed
+        ){
+
+            step.classList.add(
+                "done"
+            );
+
+            step.textContent =
+                "✓";
+
+        }
+        else if(
+            i === completed + 1
+        ){
+
+            step.classList.add(
+                "active"
+            );
+
+            step.textContent =
+                i;
+
+        }
+        else{
+
+            step.textContent =
+                i;
+
+        }
+
+    }
+
+
+    document.getElementById(
+        "line1"
+    ).classList.toggle(
+        "done",
+        completed >= 1
+    );
+
+
+    document.getElementById(
+        "line2"
+    ).classList.toggle(
+        "done",
+        completed >= 2
+    );
+
+}
+
+
+
+/* =====================================================
+   MAIN BUTTON
+===================================================== */
+
+function mainButtonClick(){
+
+
+    /*
+     * ৩/৩
+     */
+
+    if(completed >= 3){
+
+        openWebsite();
+
+        return;
+
+    }
+
+
+    /*
+     * Verification চলছে
+     */
+
+    if(waiting){
+
+        checkVerification();
+
+        return;
+
+    }
+
+
+    /*
+     * নতুন verification
+     */
+
+    startVerification();
+
+}
+
+
+
+/* =====================================================
+   OPEN VERIFICATION
+===================================================== */
+
+function startVerification(){
+
+
+    const url =
+        CONFIG.verificationURLs[
+            completed
+        ];
+
+
+    if(
+        !url ||
+        url.includes("example.com")
+    ){
+
+        showStatus(
+            "error",
+            "⚠️ CONFIG অংশে আপনার verification URL বসান।"
+        );
+
+        return;
+
+    }
+
+
+    /*
+     * Current step
+     */
+
+    const currentStep =
+        completed;
+
+
+    /*
+     * Start timestamp
+     */
+
+    const startTime =
+        Date.now();
+
+
+    /*
+     * Save everything BEFORE opening URL.
+     *
+     * এটাই গুরুত্বপূর্ণ।
+     */
+
+    localStorage.setItem(
+        START_KEY,
+        String(startTime)
+    );
+
+
+    localStorage.setItem(
+        STEP_KEY,
+        String(currentStep)
+    );
+
+
+    waiting = true;
+
+
+    const button =
+        document.getElementById(
+            "mainButton"
+        );
+
+
+    button.disabled = true;
+
+
+    button.classList.remove(
+        "green"
+    );
+
+
+    button.textContent =
+        "⏳ Verification চলছে...";
+
+
+    showStatus(
+        "waiting",
+        "Verification page খোলা হচ্ছে...<br>" +
+        "কমপক্ষে <b>৫ সেকেন্ড</b> পরে এই অ্যাপে ফিরে আসুন।"
+    );
+
+
+    /*
+     * ==========================================
+     * TELEGRAM MINI APP
+     * ==========================================
+     */
+
+    if(
+        isTelegram &&
+        window.Telegram &&
+        Telegram.WebApp &&
+        typeof Telegram.WebApp.openLink ===
+        "function"
+    ){
+
+        try{
+
+            Telegram.WebApp.openLink(
+                url
+            );
+
+        }catch(error){
+
+            console.log(
+                "Telegram openLink error:",
+                error
+            );
+
+
+            /*
+             * fallback
+             */
+
+            openNormalBrowser(url);
+
+        }
+
+    }
+
+
+    /*
+     * ==========================================
+     * NORMAL BROWSER
+     * ==========================================
+     */
+
+    else{
+
+        openNormalBrowser(url);
+
+    }
+
+
+    /*
+     * ৫ সেকেন্ড শেষে
+     */
+
+    setTimeout(
+        function(){
+
+            updateReturnButton();
+
+        },
+        CONFIG.waitSeconds * 1000
+    );
+
+}
+
+
+
+/* =====================================================
+   NORMAL BROWSER OPEN
+===================================================== */
+
+function openNormalBrowser(url){
+
+
+    /*
+     * User click-এর context ব্যবহার করে
+     * নতুন tab খোলার চেষ্টা।
+     */
+
+    const link =
+        document.createElement(
+            "a"
+        );
+
+
+    link.href = url;
+
+    link.target = "_blank";
+
+    link.rel =
+        "noopener noreferrer";
+
+
+    link.style.display =
+        "none";
+
+
+    document.body.appendChild(
+        link
+    );
+
+
+    link.click();
+
+
+    setTimeout(
+        function(){
+
+            link.remove();
+
+        },
+        1000
+    );
+
+}
+
+
+
+/* =====================================================
+   RETURN BUTTON
+===================================================== */
+
+function updateReturnButton(){
+
+
+    if(!waiting){
+
+        return;
+
+    }
+
+
+    const savedStart =
+        parseInt(
+            localStorage.getItem(
+                START_KEY
+            ) || "0",
+            10
+        );
+
+
+    if(!savedStart){
+
+        return;
+
+    }
+
+
+    const elapsed =
+        Date.now() -
+        savedStart;
+
+
+    if(
+        elapsed >=
+        CONFIG.waitSeconds * 1000
+    ){
+
+        const button =
+            document.getElementById(
+                "mainButton"
+            );
+
+
+        button.disabled = false;
+
+
+        button.textContent =
+            "↩️ আমি ফিরে এসেছি";
+
+
+        showStatus(
+            "waiting",
+            "৫ সেকেন্ড সম্পন্ন হয়েছে।<br>" +
+            "এই অ্যাপে ফিরে এসে <b>“আমি ফিরে এসেছি”</b> চাপুন।"
+        );
+
+    }
+
+}
+
+
+
+/* =====================================================
+   CHECK VERIFICATION
+===================================================== */
+
+function checkVerification(){
+
+
+    const savedStart =
+        parseInt(
+            localStorage.getItem(
+                START_KEY
+            ) || "0",
+            10
+        );
+
+
+    const savedStep =
+        parseInt(
+            localStorage.getItem(
+                STEP_KEY
+            ) || "-1",
+            10
+        );
+
+
+    /*
+     * Session নেই
+     */
+
+    if(!savedStart){
+
+        waiting = false;
+
+
+        const button =
+            document.getElementById(
+                "mainButton"
+            );
+
+
+        button.disabled = false;
+
+
+        button.textContent =
+            "🔓 আনলক করুন • " +
+            (completed + 1) +
+            "/3";
+
+
+        showStatus(
+            "error",
+            "⚠️ Verification session পাওয়া যায়নি। আবার চেষ্টা করুন।"
+        );
+
+
+        return;
+
+    }
+
+
+    /*
+     * Wrong step
+     */
+
+    if(
+        savedStep !== completed
+    ){
+
+        localStorage.removeItem(
+            START_KEY
+        );
+
+        localStorage.removeItem(
+            STEP_KEY
+        );
+
+
+        waiting = false;
+
+
+        showStatus(
+            "error",
+            "⚠️ Verification state পরিবর্তিত হয়েছে। আবার চেষ্টা করুন।"
+        );
+
+
+        return;
+
+    }
+
+
+    /*
+     * Time
+     */
+
+    const elapsed =
+        Date.now() -
+        savedStart;
+
+
+    const required =
+        CONFIG.waitSeconds *
+        1000;
+
+
+    /*
+     * ৫ সেকেন্ড হয়নি
+     */
+
+    if(
+        elapsed < required
+    ){
+
+        const remaining =
+            Math.ceil(
+                (
+                    required -
+                    elapsed
+                ) / 1000
+            );
+
+
+        showStatus(
+            "waiting",
+            "আরও <b>" +
+            remaining +
+            " সেকেন্ড</b> অপেক্ষা করুন।"
+        );
+
+
+        return;
+
+    }
+
+
+    /*
+     * Complete
+     */
+
+    completeVerification();
+
+}
+
+
+
+/* =====================================================
+   COMPLETE VERIFICATION
+===================================================== */
+
+function completeVerification(){
+
+
+    waiting = false;
+
+
+    /*
+     * Clear current verification
+     */
+
+    localStorage.removeItem(
+        START_KEY
+    );
+
+
+    localStorage.removeItem(
+        STEP_KEY
+    );
+
+
+    /*
+     * Increase progress
+     */
+
+    completed++;
+
+
+    /*
+     * ==========================================
+     * ৩/৩ COMPLETE
+     * ==========================================
+     */
+
+    if(completed >= 3){
+
+        completed = 3;
+
+
+        localStorage.setItem(
+            PROGRESS_KEY,
+            "3"
+        );
+
+
+        /*
+         * ১ ঘণ্টার unlock
+         */
+
+        localStorage.setItem(
+            UNLOCK_KEY,
+            String(Date.now())
+        );
+
+
+        updateUI();
+
+
+        showUnlocked();
+
+
+        return;
+
+    }
+
+
+    /*
+     * Save progress
+     */
+
+    localStorage.setItem(
+        PROGRESS_KEY,
+        String(completed)
+    );
+
+
+    updateUI();
+
+
+    /*
+     * Next step
+     */
+
+    document.getElementById(
+        "taskTitle"
+    ).textContent =
+        "Verification • " +
+        (completed + 1) +
+        "/3";
+
+
+    document.getElementById(
+        "taskSub"
+    ).textContent =
+        "পরবর্তী verification শুরু করুন";
+
+
+    const button =
+        document.getElementById(
+            "mainButton"
+        );
+
+
+    button.disabled = false;
+
+
+    button.textContent =
+        "🔓 আনলক করুন • " +
+        (completed + 1) +
+        "/3";
+
+
+    showStatus(
+        "success",
+        "✅ সফলভাবে সম্পন্ন হয়েছে।<br>" +
+        "এখন পরবর্তী verification শুরু করুন।"
+    );
+
+}
+
+
+
+/* =====================================================
+   UNLOCKED UI
+===================================================== */
+
+function showUnlocked(){
+
+
+    document.getElementById(
+        "lockIcon"
+    ).textContent =
+        "🔓";
+
+
+    document.getElementById(
+        "lockerTitle"
+    ).textContent =
+        "Website আনলক হয়েছে!";
+
+
+    document.getElementById(
+        "taskTitle"
+    ).textContent =
+        "Access Granted";
+
+
+    document.getElementById(
+        "taskSub"
+    ).textContent =
+        "আপনার access ১ ঘণ্টা পর্যন্ত থাকবে";
+
+
+    showStatus(
+        "success",
+        "🎉 সফলভাবে আনলক হয়েছে।<br>" +
+        "পরবর্তী ১ ঘণ্টা verification লাগবে না।"
+    );
+
+
+    const button =
+        document.getElementById(
+            "mainButton"
+        );
+
+
+    button.disabled = false;
+
+
+    button.classList.add(
+        "green"
+    );
+
+
+    button.textContent =
+        "✅ আনলক হয়েছে — Website খুলুন";
+
+
+    button.onclick =
+        openWebsite;
+
+}
+
+
+
+/* =====================================================
+   OPEN MAIN WEBSITE
+===================================================== */
+
+function openWebsite(){
+
+
+    /*
+     * Unlock expired?
+     */
+
+    if(!isUnlocked()){
+
+        resetLocker();
+
+        return;
+
+    }
+
+
+    /*
+     * URL check
+     */
+
+    if(
+        !CONFIG.websiteURL ||
+        CONFIG.websiteURL.includes(
+            "example.com"
+        )
+    ){
+
+        showStatus(
+            "error",
+            "⚠️ CONFIG অংশে আপনার Main Website URL বসান।"
+        );
+
+        return;
+
+    }
+
+
+    /*
+     * Hide locker
+     */
+
+    document.getElementById(
+        "locker"
+    ).style.display =
+        "none";
+
+
+    /*
+     * Show website
+     */
+
+    document.getElementById(
+        "website"
+    ).classList.add(
+        "show"
+    );
+
+
+    /*
+     * Load iframe
+     */
+
+    loadWebsite();
+
+}
+
+
+
+/* =====================================================
+   LOAD WEBSITE
+===================================================== */
+
+function loadWebsite(){
+
+
+    const frame =
+        document.getElementById(
+            "websiteFrame"
+        );
+
+
+    const loading =
+        document.getElementById(
+            "iframeLoading"
+        );
+
+
+    const error =
+        document.getElementById(
+            "iframeError"
+        );
+
+
+    loading.classList.remove(
+        "hide"
+    );
+
+
+    error.classList.remove(
+        "show"
+    );
+
+
+    /*
+     * Clear
+     */
+
+    frame.src =
+        "about:blank";
+
+
+    /*
+     * Load
+     */
+
+    setTimeout(
+        function(){
+
+            frame.src =
+                CONFIG.websiteURL;
+
+        },
+        80
+    );
+
+
+    let loaded = false;
+
+
+    frame.onload =
+        function(){
+
+            loaded = true;
+
+
+            loading.classList.add(
+                "hide"
+            );
+
+        };
+
+
+    /*
+     * Timeout
+     */
+
+    setTimeout(
+        function(){
+
+            if(!loaded){
+
+                loading.classList.add(
+                    "hide"
+                );
+
+
+                error.classList.add(
+                    "show"
+                );
+
+
+                document.getElementById(
+                    "iframeErrorText"
+                ).textContent =
+                    "এই Website iframe-এর ভিতরে " +
+                    "লোড হতে দিচ্ছে না অথবা Website " +
+                    "লোড করতে সমস্যা হয়েছে। " +
+                    "এই ধরনের X-Frame-Options / CSP " +
+                    "restriction হলে iframe দিয়ে জোর করে " +
+                    "Website দেখানো সম্ভব নয়।";
+
+            }
+
+        },
+        12000
+    );
+
+}
+
+
+
+/* =====================================================
+   RELOAD WEBSITE
+===================================================== */
+
+function reloadWebsite(){
+
+
+    if(!isUnlocked()){
+
+        resetLocker();
+
+        return;
+
+    }
+
+
+    loadWebsite();
+
+}
+
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+function showStatus(
+    type,
+    message
+){
+
+    const status =
+        document.getElementById(
+            "status"
+        );
+
+
+    status.className =
+        "status";
+
+
+    if(type){
+
+        status.classList.add(
+            type
+        );
+
+    }
+
+
+    status.innerHTML =
+        message;
+
+}
+
+
+
+/* =====================================================
+   RESET LOCKER
+===================================================== */
+
+function resetLocker(){
+
+
+    completed = 0;
+
+    waiting = false;
+
+
+    /*
+     * Remove state
+     */
+
+    localStorage.removeItem(
+        PROGRESS_KEY
+    );
+
+
+    localStorage.removeItem(
+        START_KEY
+    );
+
+
+    localStorage.removeItem(
+        STEP_KEY
+    );
+
+
+    localStorage.removeItem(
+        UNLOCK_KEY
+    );
+
+
+    /*
+     * Website hide
+     */
+
+    document.getElementById(
+        "website"
+    ).classList.remove(
+        "show"
+    );
+
+
+    /*
+     * Locker show
+     */
+
+    document.getElementById(
+        "locker"
+    ).style.display =
+        "block";
+
+
+    /*
+     * Reset text
+     */
+
+    document.getElementById(
+        "lockIcon"
+    ).textContent =
+        "🔒";
+
+
+    document.getElementById(
+        "lockerTitle"
+    ).textContent =
+        "Website Locked";
+
+
+    document.getElementById(
+        "taskTitle"
+    ).textContent =
+        "Verification • 1/3";
+
+
+    document.getElementById(
+        "taskSub"
+    ).textContent =
+        "শুরু করতে নিচের বাটনে চাপ দিন";
+
+
+    const button =
+        document.getElementById(
+            "mainButton"
+        );
+
+
+    button.disabled = false;
+
+
+    button.classList.remove(
+        "green"
+    );
+
+
+    button.textContent =
+        "🔓 আনলক করুন • 1/3";
+
+
+    button.onclick =
+        mainButtonClick;
+
+
+    showStatus(
+        "",
+        "আপনার ১ ঘণ্টার access শেষ হয়েছে। আবার verification করুন।"
+    );
+
+
+    updateUI();
+
+}
+
+
+
+/* =====================================================
+   AUTO EXPIRATION
+===================================================== */
+
+setInterval(
+    function(){
+
+        if(
+            completed >= 3 &&
+            !isUnlocked()
+        ){
+
+            resetLocker();
+
+        }
+
+    },
+    1000
+);
+
+
+
+/* =====================================================
+   PAGE RETURN
+===================================================== */
+
+function handleReturn(){
+
+
+    if(!waiting){
+
+        return;
+
+    }
+
+
+    updateReturnButton();
+
+}
+
+
+/*
+ * Browser back / page restore
+ */
+
+window.addEventListener(
+    "pageshow",
+    function(){
+
+        handleReturn();
+
+    }
+);
+
+
+/*
+ * App visible again
+ */
+
+document.addEventListener(
+    "visibilitychange",
+    function(){
+
+        if(
+            document.visibilityState ===
+            "visible"
+        ){
+
+            handleReturn();
+
+        }
+
+    }
+);
+
+
+/*
+ * Window focus
+ */
+
+window.addEventListener(
+    "focus",
+    function(){
+
+        handleReturn();
+
+    }
+);
+
+
+
+/* =====================================================
+   TELEGRAM MAIN BUTTON BACK
+===================================================== */
+
+try{
+
+    if(
+        isTelegram &&
+        window.Telegram &&
+        Telegram.WebApp
+    ){
+
+        Telegram.WebApp.BackButton.hide();
+
+    }
+
+}catch(error){
+
+    console.log(error);
+
+}
+
+
+
+/* =====================================================
+   FULLSCREEN
+===================================================== */
+
+function toggleFullscreen(){
+
+    document.body.classList.toggle(
+        "fullscreen"
+    );
+
+}
+
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(
+            event.key ===
+            "Escape"
+        ){
+
+            document.body.classList.remove(
+                "fullscreen"
+            );
+
+        }
+
+    }
+);
+
+
+
+/* =====================================================
+   INITIALIZE
+===================================================== */
+
+loadState();
+
+updateUI();
+
+
+/*
+ * Already unlocked
+ */
+
+if(isUnlocked()){
+
+    showUnlocked();
+
+}
+
+
+/*
+ * Pending verification
+ *
+ * App reload হলেও ৫ সেকেন্ড পার হয়ে থাকলে
+ * "আমি ফিরে এসেছি" দেখাবে।
+ */
+
+if(
+    waiting &&
+    completed < 3
+){
+
+    updateReturnButton();
+
+}
+
+</script>
+
+</body>
+
+</html>
