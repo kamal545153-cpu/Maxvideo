@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<script async src="https://js.onclckmn.com/static/onclicka.js" data-admpid="462894"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>VideoShare - প্রিমিয়াম ভিডিও প্ল্যাটফর্ম</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Hind Siliguri', 'Poppins', sans-serif; -webkit-tap-highlight-color: transparent; }
+:root {
+    --bg-primary: #0f0f14; --bg-secondary: #1a1a24; --bg-card: #22222e;
+    --accent: #ff3366; --text-primary: #fff; --text-secondary: #a0a0b0;
+    --border: #2d2d3d; --success: #00d26a;
+    --gradient: linear-gradient(135deg, #ff3366 0%, #ff6b9d 100%);
+}
+body { background: var(--bg-primary); color: var(--text-primary); min-height: 100vh; overflow-x: hidden; padding-bottom: env(safe-area-inset-bottom); }
+a { text-decoration: none; color: inherit; }
+
+/* পেজ সেকশন */
+.page-section { display: none; }
+.page-section.active { display: block; }
+
+.loading-spinner { display: flex; justify-content: center; align-items: center; padding: 60px 20px; grid-column: 1/-1; }
+.spinner { width: 40px; height: 40px; border: 3px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 1s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* হেডার */
+.header { background: rgba(15, 15, 20, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: calc(12px + env(safe-area-inset-top)) 12px 12px; position: sticky; top: 0; z-index: 1000; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.logo { font-size: 20px; font-weight: 700; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: flex; align-items: center; gap: 6px; }
+.logo i { color: var(--accent); -webkit-text-fill-color: var(--accent); }
+
+.user-actions { display: flex; gap: 8px; align-items: center; }
+
+/* ছোট লাইভ ও ভিজিটর কাউন্টার */
+.header-visitors { display: flex; align-items: center; gap: 6px; }
+.visitor-chip { display: flex; align-items: center; gap: 4px; padding: 4px 8px; background: var(--bg-card); border-radius: 20px; font-size: 11px; font-weight: 600; }
+.live-dot { width: 7px; height: 7px; background: var(--success); border-radius: 50%; animation: pulse 1.5s infinite; display: inline-block; }
+@keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(0, 210, 106, 0.7); } 50% { box-shadow: 0 0 0 5px rgba(0, 210, 106, 0); } }
+
+.btn { padding: 8px 12px; border-radius: 20px; border: none; cursor: pointer; font-weight: 600; font-size: 12px; transition: 0.2s; display: inline-flex; align-items: center; gap: 4px; }
+.btn:active { transform: scale(0.95); }
+.btn-outline { background: transparent; color: var(--text-primary); border: 1px solid var(--border); }
+.btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+/* নেভিগেশন মেনু (YouTube App Style Chips) */
+.nav-menu { background: var(--bg-primary); padding: 10px 12px; border-bottom: 1px solid var(--border); overflow-x: auto; white-space: nowrap; scrollbar-width: none; -webkit-overflow-scrolling: touch; position: sticky; top: calc(50px + env(safe-area-inset-top)); z-index: 999; }
+.nav-menu::-webkit-scrollbar { display: none; }
+.nav-menu ul { display: flex; gap: 8px; list-style: none; padding-bottom: 2px; }
+.nav-menu a { padding: 6px 14px; border-radius: 8px; background: var(--bg-card); color: var(--text-primary); font-size: 13px; font-weight: 500; transition: 0.2s; display: inline-flex; align-items: center; gap: 6px; cursor: pointer; border: 1px solid transparent; }
+.nav-menu a:active { transform: scale(0.95); }
+.nav-menu a:hover, .nav-menu a.active { background: var(--text-primary); color: var(--bg-primary); font-weight: 600; }
+
+/* সেকশন টাইটেল ও ফিল্টার */
+.section-title { padding: 16px 12px 8px; font-size: 16px; font-weight: 700; display: flex; flex-direction: column; gap: 10px; }
+.section-title-text { display: flex; align-items: center; justify-content: space-between; }
+.section-title span { color: var(--accent); }
+.section-title .category-filter { display: flex; gap: 8px; overflow-x: auto; white-space: nowrap; scrollbar-width: none; padding-bottom: 4px; }
+.category-filter::-webkit-scrollbar { display: none; }
+.category-chip { padding: 6px 12px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; font-size: 12px; font-weight: 500; cursor: pointer; transition: 0.2s; display: inline-flex; align-items: center; gap: 6px; flex-shrink: 0; color: var(--text-primary); }
+.category-chip:active { transform: scale(0.95); }
+.category-chip:hover, .category-chip.active { background: var(--text-primary); border-color: var(--text-primary); color: var(--bg-primary); }
+
+/* ভিডিও গ্রিড (Mobile: 1 Column like YouTube App) */
+.video-grid { display: grid; grid-template-columns: 1fr; gap: 16px; padding: 12px 12px 80px; }
+.video-card { background: transparent; border: none; border-radius: 0; transition: transform 0.2s; cursor: pointer; display: flex; flex-direction: column; }
+.video-card:active { transform: scale(0.98); }
+.video-thumbnail { position: relative; aspect-ratio: 16/9; background: #000; overflow: hidden; border-radius: 12px; }
+.video-thumbnail img { width: 100%; height: 100%; object-fit: cover; transition: 0.3s; }
+.video-card:hover .video-thumbnail img { transform: scale(1.05); }
+.video-duration { position: absolute; bottom: 6px; right: 6px; background: rgba(0,0,0,0.85); color: #fff; padding: 2px 6px; border-radius: 4px; font-size: 11px; font-weight: 600; backdrop-filter: blur(4px); }
+.video-categories { position: absolute; top: 6px; left: 6px; display: flex; gap: 4px; flex-wrap: wrap; }
+.video-cat-tag { background: rgba(255,51,102,0.9); color: #fff; padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: 600; backdrop-filter: blur(4px); }
+
+.auto-thumb-fallback {
+    width: 100%; height: 100%;
+    background: linear-gradient(135deg, #1a1a24 0%, #2d2d3d 100%);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    color: var(--text-secondary); padding: 10px; text-align: center;
+}
+.auto-thumb-fallback i { font-size: 32px; color: var(--accent); margin-bottom: 6px; opacity: 0.8; }
+.auto-thumb-fallback span { font-size: 11px; font-weight: 600; }
+
+.video-info { padding: 8px 0 0 0; display: flex; flex-direction: column; justify-content: flex-start; flex: 1; }
+.video-title { font-size: 14px; font-weight: 500; margin-bottom: 4px; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; color: var(--text-primary); }
+.video-meta { display: flex; justify-content: flex-start; gap: 8px; color: var(--text-secondary); font-size: 12px; }
+.video-meta span { display: flex; align-items: center; gap: 4px; }
+
+.footer { background: var(--bg-secondary); padding: 20px 15px; text-align: center; border-top: 1px solid var(--border); color: var(--text-secondary); font-size: 12px; padding-bottom: calc(20px + env(safe-area-inset-bottom)); }
+.empty-state { grid-column: 1/-1; text-align: center; padding: 60px 15px; color: var(--text-secondary); }
+.empty-state i { font-size: 40px; margin-bottom: 12px; opacity: 0.5; }
+
+/* ওয়াচ পেজ স্টাইল (Mobile App Style) */
+.watch-header {
+    background: var(--bg-primary);
+    border-bottom: 1px solid var(--border);
+    padding: calc(10px + env(safe-area-inset-top)) 12px 10px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+.back-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.2s;
+    text-decoration: none;
+    font-size: 16px;
+}
+.back-btn:active { background: var(--bg-card); transform: scale(0.9); }
+.watch-header h2 { font-size: 16px; font-weight: 600; }
+
+.player-container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0;
+    padding: 0;
+    background: #000;
+}
+.video-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: #000;
+    border-radius: 0; /* Mobile edge-to-edge */
+    overflow: hidden;
+}
+.video-wrapper iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.video-details {
+    max-width: 1000px;
+    margin: 0;
+    padding: 12px;
+    background: var(--bg-primary);
+    border-radius: 0;
+    border: none;
+    border-bottom: 1px solid var(--border);
+}
+.video-details h1 { font-size: 16px; font-weight: 600; margin-bottom: 8px; line-height: 1.4; }
+.video-meta-details {
+    display: flex;
+    gap: 12px;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+}
+.video-meta-details span { display: flex; align-items: center; gap: 4px; font-size: 12px; }
+.video-description { color: var(--text-secondary); line-height: 1.6; font-size: 13px; white-space: pre-wrap; }
+
+.not-found {
+    text-align: center;
+    padding: 60px 15px;
+    color: var(--text-secondary);
+}
+.not-found i { font-size: 48px; margin-bottom: 16px; color: var(--accent); }
+.back-btn-large {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 16px;
+    padding: 10px 20px;
+    background: var(--accent);
+    color: #fff;
+    border-radius: 24px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+    border: none;
+    transition: 0.2s;
+}
+.back-btn-large:active { transform: scale(0.95); }
+
+/* ট্যাবলেট রেসপন্সিভনেস (2 Columns) */
+@media (min-width: 600px) {
+    .video-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; padding: 16px 16px 40px; }
+    .video-card { background: var(--bg-card); border-radius: 12px; border: 1px solid var(--border); overflow: hidden; }
+    .video-card:active { transform: none; }
+    .video-thumbnail { border-radius: 0; }
+    .video-info { padding: 10px; }
+    .video-title { font-size: 13px; }
+    .section-title { flex-direction: row; align-items: center; justify-content: space-between; padding: 20px 16px 12px; font-size: 18px; }
+    
+    .player-container { padding: 16px; }
+    .video-wrapper { border-radius: 12px; overflow: hidden; }
+    .video-details { margin: 0 16px 16px; border-radius: 12px; border: 1px solid var(--border); background: var(--bg-card); }
+    .video-details h1 { font-size: 18px; }
+}
+
+/* ডেস্কটপ রেসপন্সিভনেস (3-4 Columns) */
+@media (min-width: 992px) {
+    .video-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; padding: 20px 24px 40px; }
+    .header { padding: calc(16px + env(safe-area-inset-top)) 24px 16px; }
+    .logo { font-size: 24px; }
+    .video-title { font-size: 14px; }
+    .player-container { padding: 24px 0; }
+    .video-details { margin: 0 auto 24px; padding: 20px; max-width: 800px; }
+    .video-details h1 { font-size: 20px; }
+}
+
+@media (min-width: 1200px) {
+    .video-grid { grid-template-columns: repeat(4, 1fr); }
+}
+</style>
+</head>
+<body>
+
+<!-- ================= হোম পেজ ================= -->
+<div id="homePage" class="page-section active">
+    <header class="header">
+        <div class="logo"><i class="fas fa-play-circle"></i> VideoShare</div>
+        
+        <div class="user-actions">
+            <!-- ছোট লাইভ ও ভিজিটর কাউন্টার -->
+            <div class="header-visitors">
+                <div class="visitor-chip">
+                    <span class="live-dot"></span>
+                    <span id="liveCount" style="color: var(--success);">0</span>
+                </div>
+                <div class="visitor-chip">
+                    <i class="fas fa-eye" style="color: var(--accent); font-size: 10px;"></i>
+                    <span id="todayCount" style="color: var(--text-primary);">0</span>
+                </div>
+            </div>
+
+            <button class="btn btn-outline" onclick="window.location.href='admin.html'"><i class="fas fa-user-shield"></i></button>
+        </div>
+    </header>
+
+    <nav class="nav-menu">
+        <ul id="navMenu">
+            <li><a href="#" class="active" data-category="all"><i class="fas fa-home"></i> হোম</a></li>
+        </ul>
+    </nav>
+
+    <div class="section-title">
+        <div class="section-title-text">
+            <div><i class="fas fa-fire" style="color: var(--accent);"></i> <span id="currentCategoryName">সকল</span> ভিডিও</div>
+        </div>
+        <div class="category-filter" id="categoryFilter"></div>
+    </div>
+
+    <div class="video-grid" id="videoGrid">
+        <div class="loading-spinner"><div class="spinner"></div></div>
+    </div>
+
+    <footer class="footer">
+        <p>© 2026 VideoShare | সমস্ত অধিকার সংরক্ষিত</p>
+    </footer>
+</div>
+
+<!-- ================= ওয়াচ পেজ ================= -->
+<div id="watchPage" class="page-section">
+    <header class="watch-header">
+        <button class="back-btn" onclick="goHome()"><i class="fas fa-arrow-left"></i></button>
+        <h2>VideoShare</h2>
+    </header>
+
+    <div id="watchContent">
+        <div class="not-found">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>ভিডিও লোড হচ্ছে...</p>
+        </div>
+    </div>
+</div>
+
+<script type="module">
+// পরিবর্তন ১: updateDoc এবং increment ইম্পোর্ট করা হয়েছে
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+import { getFirestore, collection, getDocs, doc, getDoc, query, orderBy, updateDoc, increment } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+import { getDatabase, ref, onValue, runTransaction } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDHFNgFVo0ntRhigMcyc_NtMWE7LRR0VUI",
+  authDomain: "inkambd.firebaseapp.com",
+  databaseURL: "https://inkambd-default-rtdb.firebaseio.com",
+  projectId: "inkambd",
+  storageBucket: "inkambd.firebasestorage.app",
+  messagingSenderId: "883089304650",
+  appId: "1:883089304650:web:1fca4c5b9befd56aee0ab3",
+  measurementId: "G-4C3TNR2PEE"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const rtdb = getDatabase(app);
+
+let allVideos = [];
+let allCategories = [];
+let currentCategory = 'all';
+
+// ========== রাউটিং সিস্টেম ==========
+function checkRoute() {
+    const hash = window.location.hash;
+    if (hash.startsWith('#watch=')) {
+        const videoId = hash.replace('#watch=', '');
+        showWatchPage(videoId);
+    } else {
+        showHomePage();
+    }
+}
+
+function showHomePage() {
+    if (document.getElementById('homePage').classList.contains('active')) return;
+    document.getElementById('homePage').classList.add('active');
+    document.getElementById('watchPage').classList.remove('active');
+    window.scrollTo(0, 0);
+}
+
+function showWatchPage(videoId) {
+    document.getElementById('homePage').classList.remove('active');
+    document.getElementById('watchPage').classList.add('active');
+    loadWatchVideo(videoId);
+    window.scrollTo(0, 0);
+
+    // 🛠️ স্মার্ট ব্যাক বাটন ফিক্স: সরাসরি ভিডিও লিংকে আসলে হিস্ট্রিতে একটি ডামি স্টেট যোগ করা হচ্ছে
+    if (window.history.length <= 1) {
+        window.history.pushState({ fromWatch: true }, "", window.location.href);
+    }
+}
+
+// গ্লোবালি এক্সেস করার জন্য window অবজেক্টে যোগ করা হলো (type="module" এর জন্য জরুরি)
+window.goHome = function() {
+    window.history.replaceState(null, null, window.location.pathname);
+    window.location.hash = '';
+    showHomePage();
+};
+
+// ========== স্মার্ট থাম্বনেইল জেনারেটর ==========
+function getSmartThumbnail(video) {
+    if (video.thumbnail && video.thumbnail.trim() !== '') {
+        return `<img src="${video.thumbnail}" alt="${video.title}" onerror="this.parentElement.innerHTML='<div class=\\'auto-thumb-fallback\\'><i class=\\'fas fa-play-circle\\'></i><span>ভিডিও দেখতে ক্লিক করুন</span></div>';">`;
+    }
+    
+    const ytMatch = video.embedUrl.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/);
+    if (ytMatch && ytMatch[1]) {
+        return `<img src="https://img.youtube.com/vi/${ytMatch[1]}/hqdefault.jpg" alt="${video.title}">`;
+    }
+    
+    return `<div class="auto-thumb-fallback"><i class="fas fa-play-circle"></i><span>ভিডিও দেখতে ক্লিক করুন</span></div>`;
+}
+
+// ========== ক্যাটাগরি লোড ==========
+async function loadCategories() {
+    try {
+        const q = query(collection(db, "categories"), orderBy("order", "asc"));
+        const snap = await getDocs(q);
+        allCategories = [];
+        snap.forEach(d => {
+            const cat = { id: d.id, ...d.data() };
+            if (cat.visible !== false) allCategories.push(cat);
+        });
+        renderNavMenu();
+        renderCategoryFilter();
+    } catch (e) { console.error(e); }
+}
+
+function renderNavMenu() {
+    const nav = document.getElementById('navMenu');
+    nav.innerHTML = '<li><a href="#" class="active" data-category="all"><i class="fas fa-home"></i> হোম</a></li>';
+    allCategories.forEach(cat => {
+        const li = document.createElement('li');
+        li.innerHTML = `<a href="#" data-category="${cat.id}"><i class="fas ${cat.icon || 'fa-folder'}"></i> ${cat.name}</a>`;
+        nav.appendChild(li);
+    });
+    nav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            nav.querySelectorAll('a').forEach(l => l.classList.remove('active'));
+            this.classList.add('active');
+            currentCategory = this.dataset.category;
+            const cat = allCategories.find(c => c.id === currentCategory);
+            document.getElementById('currentCategoryName').textContent = cat ? cat.name : 'সকল';
+            filterAndRender();
+        });
+    });
+}
+
+function renderCategoryFilter() {
+    const filter = document.getElementById('categoryFilter');
+    filter.innerHTML = '';
+    allCategories.slice(0, 6).forEach(cat => {
+        const chip = document.createElement('span');
+        chip.className = 'category-chip' + (cat.id === currentCategory ? ' active' : '');
+        chip.innerHTML = `<i class="fas ${cat.icon || 'fa-folder'}"></i> ${cat.name}`;
+        chip.onclick = () => {
+            currentCategory = cat.id;
+            document.getElementById('currentCategoryName').textContent = cat.name;
+            filterAndRender();
+            document.querySelectorAll('.category-chip').forEach(c => c.classList.remove('active'));
+            chip.classList.add('active');
+        };
+        filter.appendChild(chip);
+    });
+}
+
+// ========== ভিডিও লোড ==========
+async function loadVideos() {
+    try {
+        const q = query(collection(db, "videos"), orderBy("createdAt", "desc"));
+        const snap = await getDocs(q);
+        allVideos = [];
+        snap.forEach(d => allVideos.push({ id: d.id, ...d.data() }));
+        filterAndRender();
+    } catch (e) {
+        document.getElementById('videoGrid').innerHTML = '<p class="empty-state"><i class="fas fa-exclamation-triangle"></i><br>ভিডিও লোড করতে সমস্যা হয়েছে</p>';
+    }
+}
+
+function filterAndRender() {
+    let filtered = allVideos;
+    if (currentCategory !== 'all') {
+        filtered = filtered.filter(v => (v.categories || []).includes(currentCategory));
+    }
+    renderVideos(filtered);
+}
+
+function renderVideos(videoList) {
+    const grid = document.getElementById('videoGrid');
+    grid.innerHTML = '';
+    if (videoList.length === 0) {
+        grid.innerHTML = '<div class="empty-state"><i class="fas fa-video-slash"></i><p>কোনো ভিডিও পাওয়া যায়নি</p></div>';
+        return;
+    }
+    videoList.forEach(video => {
+        const card = document.createElement('div');
+        card.className = 'video-card';
+        card.onclick = () => {
+            window.location.hash = `watch=${video.id}`;
+        };
+        
+        const thumbnailHtml = getSmartThumbnail(video);
+        const catTags = (video.categories || []).slice(0, 2).map(cid => {
+            const c = allCategories.find(x => x.id === cid);
+            return c ? `<span class="video-cat-tag"><i class="fas ${c.icon || 'fa-folder'}"></i> ${c.name}</span>` : '';
+        }).join('');
+        
+        card.innerHTML = `
+            <div class="video-thumbnail">
+                ${catTags ? `<div class="video-categories">${catTags}</div>` : ''}
+                ${thumbnailHtml}
+                <span class="video-duration">${video.duration}</span>
+            </div>
+            <div class="video-info">
+                <div class="video-title">${video.title}</div>
+                <div class="video-meta">
+                    <span><i class="fas fa-eye"></i> ${video.views || '0'}</span>
+                    <span><i class="fas fa-clock"></i> ${video.date || 'এইমাত্র'}</span>
+                </div>
+            </div>`;
+        grid.appendChild(card);
+    });
+}
+
+// ========== ওয়াচ পেজ ভিডিও লোড ==========
+async function loadWatchVideo(videoId) {
+    const contentArea = document.getElementById('watchContent');
+    
+    try {
+        const docRef = doc(db, "videos", videoId);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+            const video = docSnap.data();
+            
+            // পরিবর্তন ২: ভিডিও লোড হওয়ার সাথে সাথে ডাটাবেসে ভিউ ১ বাড়ানো হচ্ছে
+            updateDoc(docRef, {
+                views: increment(1)
+            }).catch(err => console.error("View count update failed:", err));
+            
+            // UI-তে সাথে সাথে আপডেট করা ভিউ সংখ্যা দেখানোর জন্য
+            const updatedViews = (video.views || 0) + 1;
+            
+            contentArea.innerHTML = `
+                <div class="player-container">
+                    <div class="video-wrapper">
+                        <iframe src="${video.embedUrl}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <div class="video-details">
+                    <h1>${video.title}</h1>
+                    <div class="video-meta-details">
+                        <span><i class="fas fa-eye"></i> ${updatedViews} ভিউ</span>
+                        <span><i class="fas fa-clock"></i> ${video.duration || ''}</span>
+                        <span><i class="fas fa-calendar"></i> আপলোড: ${video.date || 'অজানা'}</span>
+                    </div>
+                    <div class="video-description">
+                        ${video.description || 'কোনো বিবরণ যোগ করা হয়নি।'}
+                    </div>
+                </div>
+            `;
+            
+            document.title = `${video.title} - VideoShare`;
+        } else {
+            contentArea.innerHTML = `
+                <div class="not-found">
+                    <i class="fas fa-video-slash"></i>
+                    <h3>ভিডিওটি খুঁজে পাওয়া যায়নি</h3>
+                    <button class="back-btn-large" onclick="goHome()"><i class="fas fa-home"></i> হোম পেজে ফিরে যান</button>
+                </div>`;
+        }
+    } catch (error) {
+        console.error("Error:", error);
+        contentArea.innerHTML = `
+            <div class="not-found">
+                <i class="fas fa-exclamation-triangle"></i>
+                <h3>সমস্যা হয়েছে</h3>
+                <p>ভিডিও লোড করতে সমস্যা হচ্ছে।</p>
+                <button class="back-btn-large" onclick="goHome()"><i class="fas fa-home"></i> হোম পেজে ফিরে যান</button>
+            </div>`;
+    }
+}
+
+// ========== ইভেন্ট লিসেনার ==========
+window.addEventListener('hashchange', checkRoute);
+
+// 🛠️ পপস্টেট ইভেন্ট (মোবাইল ব্যাক বাটন ১০০% কন্ট্রোল করার জন্য)
+window.addEventListener('popstate', (event) => {
+    if (event.state && event.state.fromWatch) {
+        window.history.replaceState(null, null, window.location.pathname);
+        window.location.hash = '';
+    } else {
+        checkRoute();
+    }
+});
+
+// ========== ভিজিটর কাউন্ট ==========
+const today = new Date().toDateString();
+const visitsRef = ref(rtdb, 'visits/' + today);
+onValue(visitsRef, (s) => { document.getElementById('todayCount').textContent = s.val() || 0; });
+runTransaction(visitsRef, (c) => (c || 0) + 1);
+
+function updateLive() { document.getElementById('liveCount').textContent = Math.floor(Math.random() * 150) + 50; }
+updateLive();
+setInterval(updateLive, 30000);
+
+// ========== ইনিশিয়ালাইজেশন ==========
+await loadCategories();
+await loadVideos();
+checkRoute(); // URL চেক করে সঠিক পেজ দেখাও
+</script>
+
+</body>
+</html>
